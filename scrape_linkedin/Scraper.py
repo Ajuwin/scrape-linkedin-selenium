@@ -40,7 +40,11 @@ class Scraper(object):
             return
 
         self.was_passed_instance = False
-        self.driver = driver(**driver_options)
+        chrome_options = driver.ChromeOptions()
+        chrome_options.add_argument('headless')
+        chrome_options.add_argument('window-size=1920x1080')
+        chrome_options.add_argument("disable-gpu")
+        self.driver = driver(options=chrome_options)
         self.scroll_pause = scroll_pause
         self.scroll_increment = scroll_increment
         self.timeout = timeout
